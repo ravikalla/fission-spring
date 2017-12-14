@@ -6,7 +6,9 @@ Download code from "https://github.com/spring-cloud/spring-cloud-function/tree/m
 
 ```
 $ git clone https://github.com/spring-cloud/spring-cloud-function.git
+
 $ cd spring-cloud-function/spring-cloud-function-compiler/
+
 $ mvn clean install
 ```
 
@@ -17,10 +19,10 @@ Change the `docker.image.prefix` property in `pom.xml` to your DockerHub usernam
 Then execute the following commands:
 
 ```
-./mvnw clean package docker:build
+$ ./mvnw clean package docker:build
 
-docker push ravikalla/fission-spring-env
-Syntax: docker push [your-prefix]/fission-spring-env
+$ docker push ravikalla/fission-spring-env
+    Syntax: docker push [your-prefix]/fission-spring-env
 ```
 
 # Create a Function
@@ -33,18 +35,18 @@ Start Fission as described in its [README](https://github.com/fission/fission).
 Then execute the following commands:
 
 ```
-fission env create --name spring --image ravikalla/fission-spring-env
-Syntax: fission env create --name spring --image [your-prefix]/fission-spring-env
+$ fission env create --name spring --image ravikalla/fission-spring-env
+    Syntax: fission env create --name spring --image [your-prefix]/fission-spring-env
 
-fission function create --name uppercase --env spring --code user.fun
+$ fission function create --name uppercase --env spring --code user.fun
 
-fission route create --method POST --url /uppercase --function uppercase
+$ fission route create --method POST --url /uppercase --function uppercase
 ```
 
 # Invoke the Function
 
 ```
-curl -X POST -H "Content-Type: text/plain" -d "Hello World" http://$FISSION_ROUTER/uppercase
+$ curl -X POST -H "Content-Type: text/plain" -d "Hello World" http://$FISSION_ROUTER/uppercase
 ```
 
 
